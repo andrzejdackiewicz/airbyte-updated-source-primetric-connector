@@ -1,0 +1,26 @@
+{
+  "type": "object",
+  "properties": {
+    "uuid": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "name": {
+      "type": ["null", "string"]
+    },
+    "degree": {
+      "type": ["null", "string"]
+    },
+    "starts_at": {
+      "type": ["null", "string"],
+      "format": "date-time"
+    },
+    "ends_at": {
+      "type": ["null", "string"],
+      "format": "date-time"
+    },
+    "description": {
+      "type": ["null", "string"]
+    }
+  }
+}

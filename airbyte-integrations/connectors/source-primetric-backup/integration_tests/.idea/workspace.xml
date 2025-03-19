@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="4b088b5c-7acb-468e-b8f9-27212c33dca7" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../../source-primetric/integration_tests/catalog.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../source-primetric/integration_tests/config_full_migration.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../source-primetric/integration_tests/config_migration_date.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../source-primetric/integration_tests/config_migration_days.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../source-primetric/integration_tests/configured_catalog_limited.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../source-primetric/integration_tests/configured_catalog_single.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../source-primetric/integration_tests/configured_catalog_worklogs_only.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../source-primetric/integration_tests/invalid_config_no_migration_type.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../source-primetric/integration_tests/invalid_config_wrong_migration_type.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../source-primetric/pyproject.toml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../source-primetric/sample_files/configured_catalog.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../source-primetric/source_primetric/schemas/assignments.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../source-primetric/source_primetric/schemas/contracts.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../source-primetric/source_primetric/schemas/employees.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../source-primetric/source_primetric/schemas/employees_certificates.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../source-primetric/source_primetric/schemas/employees_contracts.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../source-primetric/source_primetric/schemas/employees_education.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../source-primetric/source_primetric/schemas/employees_entries.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../source-primetric/source_primetric/schemas/employees_experiences.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../source-primetric/source_primetric/schemas/hashtags.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../source-primetric/source_primetric/schemas/organization_clients.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../source-primetric/source_primetric/schemas/organization_company_groups.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../source-primetric/source_primetric/schemas/organization_departments.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../source-primetric/source_primetric/schemas/organization_identity_providers.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../source-primetric/source_primetric/schemas/organization_positions.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../source-primetric/source_primetric/schemas/organization_rag_scopes.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../source-primetric/source_primetric/schemas/organization_roles.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../source-primetric/source_primetric/schemas/organization_seniorities.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../source-primetric/source_primetric/schemas/organization_skills.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../source-primetric/source_primetric/schemas/organization_tags.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../source-primetric/source_primetric/schemas/organization_teams.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../source-primetric/source_primetric/schemas/organization_timeoff_types.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../source-primetric/source_primetric/schemas/people.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../source-primetric/source_primetric/schemas/projects.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../source-primetric/source_primetric/schemas/projects_vacancies.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../source-primetric/source_primetric/schemas/rag_ratings.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../source-primetric/source_primetric/schemas/reports_custom.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../source-primetric/source_primetric/schemas/reports_custom_data.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../source-primetric/source_primetric/schemas/shared/custom_attributes.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../source-primetric/source_primetric/schemas/shared/money_object.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../source-primetric/source_primetric/schemas/timeoffs.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../source-primetric/source_primetric/schemas/worklogs.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../source-primetric/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../source-primetric/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../source-primetric/acceptance-test-config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../../source-primetric/acceptance-test-config.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../source-primetric/integration_tests/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../source-primetric/integration_tests/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../source-primetric/integration_tests/acceptance.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../source-primetric/integration_tests/acceptance.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../source-primetric/integration_tests/configured_catalog.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../source-primetric/integration_tests/configured_catalog.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../source-primetric/integration_tests/invalid_config.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../source-primetric/integration_tests/invalid_config.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../source-primetric/manifest.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../source-primetric/metadata.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../../source-primetric/metadata.yaml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../../.." />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 1
+}]]></component>
+  <component name="ProjectId" id="2uRIbyyARsbBdglMoKr4J3Sqor3" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "/home/andrzejd/Documents/Projects/internal-analytics/airbyte/airbyte-integrations/connectors/source-primetric-backup/source-primetric"
+  }
+}]]></component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="4b088b5c-7acb-468e-b8f9-27212c33dca7" name="Changes" comment="" />
+      <created>1742205035338</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1742205035338</updated>
+    </task>
+    <servers />
+  </component>
+</project>

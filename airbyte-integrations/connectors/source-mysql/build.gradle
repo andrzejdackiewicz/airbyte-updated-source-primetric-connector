@@ -1,0 +1,21 @@
+plugins {
+    id 'airbyte-bulk-connector'
+}
+
+application {
+    mainClass = 'io.airbyte.integrations.source.mysql.MySqlSource'
+}
+
+airbyteBulkConnector {
+    core = 'extract'
+    toolkits = ['extract-jdbc', 'extract-cdc']
+    cdk = 'local'
+}
+
+dependencies {
+    implementation 'com.mysql:mysql-connector-j:9.1.0'
+    implementation 'io.debezium:debezium-connector-mysql'
+
+    testImplementation 'org.testcontainers:mysql'
+    testImplementation 'io.mockk:mockk:1.12.0'
+}

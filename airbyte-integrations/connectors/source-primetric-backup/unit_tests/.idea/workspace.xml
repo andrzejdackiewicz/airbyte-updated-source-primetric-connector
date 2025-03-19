@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="6869d5de-2d96-4393-8769-1b58d215555b" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../../source-primetric/pyproject.toml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../source-primetric/sample_files/configured_catalog.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../source-primetric/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../source-primetric/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../source-primetric/acceptance-test-config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../../source-primetric/acceptance-test-config.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../source-primetric/integration_tests/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../source-primetric/integration_tests/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../source-primetric/integration_tests/acceptance.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../source-primetric/integration_tests/acceptance.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../source-primetric/integration_tests/configured_catalog.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../source-primetric/integration_tests/configured_catalog.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../source-primetric/integration_tests/invalid_config.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../source-primetric/integration_tests/invalid_config.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../source-primetric/integration_tests/sample_config.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../source-primetric/integration_tests/sample_config.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../source-primetric/manifest.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../source-primetric/metadata.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../../source-primetric/metadata.yaml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../../.." />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 0
+}]]></component>
+  <component name="ProjectId" id="2uRE3y0FV4XEKt1MPh59UziuWpm" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "/home/andrzejd/Documents/Projects/internal-analytics/airbyte/airbyte-integrations/connectors/source-primetric-backup/main.py"
+  }
+}]]></component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="6869d5de-2d96-4393-8769-1b58d215555b" name="Changes" comment="" />
+      <created>1742202790478</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1742202790478</updated>
+    </task>
+    <servers />
+  </component>
+</project>

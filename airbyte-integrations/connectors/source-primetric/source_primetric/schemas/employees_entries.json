@@ -1,0 +1,36 @@
+{
+  "type": "object",
+  "properties": {
+    "uuid": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "level": {
+      "type": ["null", "string"]
+    },
+    "skill": {
+      "type": ["null", "object"],
+      "properties": {
+        "name": {
+          "type": ["null", "string"]
+        },
+        "uuid": {
+          "type": ["null", "string"],
+          "format": "uuid"
+        },
+        "ancestors_list": {
+          "type": ["null", "object"],
+          "properties": {
+            "uuid": {
+              "type": ["null", "string"],
+              "format": "uuid"
+            },
+            "name": {
+              "type": ["null", "string"]
+            }
+          }
+        }
+      }
+    }
+  }
+}

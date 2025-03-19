@@ -1,0 +1,22 @@
+{
+  "type": "object",
+  "properties": {
+    "uuid": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "issuer": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "url": {
+      "type": "string"
+    },
+    "issue_date": {
+      "type": ["string"],
+      "format": "date-time"
+    }
+  }
+}

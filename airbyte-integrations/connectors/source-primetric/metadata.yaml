@@ -1,7 +1,7 @@
 data:
   allowedHosts:
     hosts:
-      - TODO # Please change to the hostname of the source.
+      - "*.primetric.com"
   registries:
     oss:
       enabled: true
@@ -16,13 +16,13 @@ data:
   connectorSubtype: api
   connectorType: source
   definitionId: eed5b54b-1abc-4689-b710-8994b73c5acb
-  dockerImageTag: 0.1.1
+  dockerImageTag: 0.2.0
   dockerRepository: airbyte/source-primetric
   githubIssueLabel: source-primetric
   icon: icon.svg
   license: MIT
   name: Primetric
-  releaseDate: TODO
+  releaseDate:  2022-09-21
   supportLevel: community
   releaseStage: alpha
   documentationUrl: https://docs.airbyte.com/integrations/sources/primetric

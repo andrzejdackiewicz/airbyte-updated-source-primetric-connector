@@ -1,35 +1,25 @@
 {
   "type": "object",
   "properties": {
-    "uuid": {
-      "type": "string",
-      "format": "uuid"
+    "employee_uuid": {
+      "type": "string"
+    },
+    "entry_uuid": {
+      "type": "string"
     },
     "level": {
       "type": ["null", "string"]
     },
-    "skill": {
-      "type": ["null", "object"],
-      "properties": {
-        "name": {
-          "type": ["null", "string"]
-        },
-        "uuid": {
-          "type": ["null", "string"],
-          "format": "uuid"
-        },
-        "ancestors_list": {
-          "type": ["null", "object"],
-          "properties": {
-            "uuid": {
-              "type": ["null", "string"],
-              "format": "uuid"
-            },
-            "name": {
-              "type": ["null", "string"]
-            }
-          }
-        }
+    "skill_name": {
+      "type": ["null", "string"]
+    },
+    "skill_uuid": {
+      "type": ["null", "string"]
+    },
+    "skill_ancestors_list": {
+      "type": ["null", "array"],
+      "items": {
+        "type": ["null", "string"]
       }
     }
   }

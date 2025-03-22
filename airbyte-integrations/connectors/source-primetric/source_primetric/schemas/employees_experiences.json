@@ -1,9 +1,11 @@
 {
   "type": "object",
   "properties": {
-    "uuid": {
-      "type": "string",
-      "format": "uuid"
+    "employee_uuid": {
+      "type": "string"
+    },
+    "experience_uuid": {
+      "type": "string"
     },
     "position": {
       "type": ["null", "string"]

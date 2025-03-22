@@ -1,21 +1,23 @@
 {
   "type": "object",
   "properties": {
-    "uuid": {
-      "type": "string",
-      "format": "uuid"
+    "employee_uuid": {
+      "type": "string"
+    },
+    "certificate_uuid": {
+      "type": ["null", "string"]
     },
     "issuer": {
-      "type": "string"
+      "type": ["null", "string"]
     },
     "name": {
-      "type": "string"
+      "type": ["null", "string"]
     },
     "url": {
-      "type": "string"
+      "type": ["null", "string"]
     },
     "issue_date": {
-      "type": ["string"],
+      "type": ["null", "string"],
       "format": "date-time"
     }
   }

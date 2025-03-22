@@ -52,23 +52,43 @@ class Contracts(PrimetricStream):
     def path(self, **kwargs) -> str:
         return "contracts"
 
+    def parse_response(self, response: requests.Response, **kwargs) -> Iterable[Mapping]:
+        yield from response.json()["results"]
+
 
 class Employees(PrimetricStream):
+    primary_key = "uuid"
+
     def path(self, **kwargs) -> str:
         return "employees"
 
 
 class EmployeesCertificates(HttpSubStream, PrimetricStream):
+    primary_key = "certificate_uuid"
+
     def __init__(self, parent, authenticator, **kwargs):
         super().__init__(parent=parent, authenticator=authenticator, **kwargs)
 
     def path(self, stream_state: Mapping[str, Any] = None, stream_slice: Mapping[str, Any] = None,
              next_page_token: Mapping[str, Any] = None
              ) -> str:
-        return f"employees/{stream_slice['parent']['uuid']}/certificates"
+        return f"employees/{stream_slice['uuid']}/certificates"
 
     def parse_response(self, response: requests.Response, **kwargs) -> Iterable[Mapping]:
-        yield from [{"uuid": ''.join(response.url.split("certificates/")[1].split("/data")[0]), "data": response.text}]
+        uuid = str(response.url.split("employees/")[1].split("/certificates")[0])
+
+        elements = response.json()
+        if not elements:
+            return
+        for element in elements:
+            yield {
+                "employee_uuid": uuid,
+                "certificate_uuid": element.get("uuid"),
+                "issuer": element.get("issuer"),
+                "name": element.get("name"),
+                "url": element.get("url"),
+                "issue_date": element.get("issue_date"),
+            }
 
     def next_page_token(self, response: requests.Response) -> Optional[Mapping[str, Any]]:
         return None
@@ -79,35 +99,49 @@ class EmployeesCertificates(HttpSubStream, PrimetricStream):
             cursor_field: List[str] = None,
             stream_state: Mapping[str, Any] = None,
     ) -> Iterable[Optional[Mapping[str, Any]]]:
-        # gather parent stream records in full
-        parent_stream_slices = self.parent.stream_slices(
-            sync_mode=sync_mode, cursor_field=cursor_field, stream_state=stream_state
-        )
 
-        # iterate over parent stream slices
-        for current_slice in parent_stream_slices:
-            parent_records = self.parent.read_records(
-                sync_mode=sync_mode, cursor_field=cursor_field, stream_slice=current_slice, stream_state=stream_state
-            )
-
-            for record in parent_records:
-                yield {"parent": record}
+        for employee in self.parent.read_records(sync_mode):
+            yield {"uuid": employee["uuid"]}
 
 
 class EmployeesContracts(HttpSubStream, PrimetricStream):
+    primary_key = "contract_uuid"
+
     def __init__(self, parent, authenticator, **kwargs):
         super().__init__(parent=parent, authenticator=authenticator, **kwargs)
 
     def path(self, stream_state: Mapping[str, Any] = None, stream_slice: Mapping[str, Any] = None,
              next_page_token: Mapping[str, Any] = None
              ) -> str:
-        return f"employees/{stream_slice['parent']['uuid']}/contracts"
+        return f"employees/{stream_slice['uuid']}/contracts"
 
     def parse_response(self, response: requests.Response, **kwargs) -> Iterable[Mapping]:
-        yield from [{"uuid": ''.join(response.url.split("contracts/")[1].split("/data")[0]), "data": response.text}]
+        uuid = str(response.url.split("employees/")[1].split("/contracts")[0])
 
-    def next_page_token(self, response: requests.Response) -> Optional[Mapping[str, Any]]:
-        return None
+        elements = response.json()["results"]
+        if not elements:
+            return
+        for element in elements:
+            yield {
+                "employee_uuid": uuid,
+                "contract_uuid": element.get("uuid"),
+                "starts_at": element.get("starts_at"),
+                "ends_at": element.get("ends_at"),
+                "custom_attributes": element.get("custom_attributes"),
+                "employment_type": element.get("employment_type"),
+                "capacity_monday": element.get("capacity_monday"),
+                "capacity_tuesday": element.get("capacity_tuesday"),
+                "capacity_wednesday": element.get("capacity_wednesday"),
+                "capacity_thursday": element.get("capacity_thursday"),
+                "capacity_friday": element.get("capacity_friday"),
+                "capacity_saturday": element.get("capacity_saturday"),
+                "capacity_sunday": element.get("capacity_sunday"),
+                "contract_title": element.get("contract_title"),
+                "total_month_cost": element.get("total_month_cost"),
+                "default_hour_cost": element.get("default_hour_cost"),
+                "default_hour_rate": element.get("default_hour_rate"),
+                "schedule_contractor_cost": element.get("schedule_contractor_cost")
+            }
 
     def stream_slices(
             self,
@@ -115,32 +149,37 @@ class EmployeesContracts(HttpSubStream, PrimetricStream):
             cursor_field: List[str] = None,
             stream_state: Mapping[str, Any] = None,
     ) -> Iterable[Optional[Mapping[str, Any]]]:
-        # gather parent stream records in full
-        parent_stream_slices = self.parent.stream_slices(
-            sync_mode=sync_mode, cursor_field=cursor_field, stream_state=stream_state
-        )
 
-        # iterate over parent stream slices
-        for current_slice in parent_stream_slices:
-            parent_records = self.parent.read_records(
-                sync_mode=sync_mode, cursor_field=cursor_field, stream_slice=current_slice, stream_state=stream_state
-            )
-
-            for record in parent_records:
-                yield {"parent": record}
+        for employee in self.parent.read_records(sync_mode):
+            yield {"uuid": employee["uuid"]}
 
 
 class EmployeesEntries(HttpSubStream, PrimetricStream):
+    primary_key = "entry_uuid"
+
     def __init__(self, parent, authenticator, **kwargs):
         super().__init__(parent=parent, authenticator=authenticator, **kwargs)
 
     def path(self, stream_state: Mapping[str, Any] = None, stream_slice: Mapping[str, Any] = None,
              next_page_token: Mapping[str, Any] = None
              ) -> str:
-        return f"employees/{stream_slice['parent']['uuid']}/entries"
+        return f"employees/{stream_slice['uuid']}/entries"
 
     def parse_response(self, response: requests.Response, **kwargs) -> Iterable[Mapping]:
-        yield from [{"uuid": ''.join(response.url.split("entries/")[1].split("/data")[0]), "data": response.text}]
+        uuid = str(response.url.split("employees/")[1].split("/entries")[0])
+
+        elements = response.json()
+        if not elements:
+            return
+        for element in elements:
+            yield {
+                "employee_uuid": uuid,
+                "entry_uuid": element.get("uuid"),
+                "level": element.get("level"),
+                "skill_name": element.get("skill").get("name"),
+                "skill_uuid": element.get("skill").get("uuid"),
+                "skill_ancestors_list": element.get("skill").get("ancestors_list")
+            }
 
     def next_page_token(self, response: requests.Response) -> Optional[Mapping[str, Any]]:
         return None
@@ -151,32 +190,42 @@ class EmployeesEntries(HttpSubStream, PrimetricStream):
             cursor_field: List[str] = None,
             stream_state: Mapping[str, Any] = None,
     ) -> Iterable[Optional[Mapping[str, Any]]]:
-        # gather parent stream records in full
-        parent_stream_slices = self.parent.stream_slices(
-            sync_mode=sync_mode, cursor_field=cursor_field, stream_state=stream_state
-        )
-
-        # iterate over parent stream slices
-        for current_slice in parent_stream_slices:
-            parent_records = self.parent.read_records(
-                sync_mode=sync_mode, cursor_field=cursor_field, stream_slice=current_slice, stream_state=stream_state
-            )
-
-            for record in parent_records:
-                yield {"parent": record}
+        for employee in self.parent.read_records(sync_mode):
+            yield {"uuid": employee["uuid"]}
 
 
 class EmployeesExperiences(HttpSubStream, PrimetricStream):
+    primary_key = "experience_uuid"
+
     def __init__(self, parent, authenticator, **kwargs):
         super().__init__(parent=parent, authenticator=authenticator, **kwargs)
 
     def path(self, stream_state: Mapping[str, Any] = None, stream_slice: Mapping[str, Any] = None,
              next_page_token: Mapping[str, Any] = None
              ) -> str:
-        return f"employees/{stream_slice['parent']['uuid']}/experiences"
+        return f"employees/{stream_slice['uuid']}/experiences"
 
     def parse_response(self, response: requests.Response, **kwargs) -> Iterable[Mapping]:
-        yield from [{"uuid": ''.join(response.url.split("experiences/")[1].split("/data")[0]), "data": response.text}]
+        uuid = str(response.url.split("employees/")[1].split("/experiences")[0])
+
+        elements = response.json()
+        if not elements:
+            return
+        for element in elements:
+            yield {
+                "employee_uuid": uuid,
+                "experience_uuid": element.get("uuid"),
+                "position": element.get("position"),
+                "project_name": element.get("project_name"),
+                "industry": element.get("industry"),
+                "region": element.get("region"),
+                "duration": element.get("duration"),
+                "work_start": element.get("work_start"),
+                "work_end": element.get("work_end"),
+                "desc": element.get("desc"),
+                "skills": element.get("skills"),
+                "skills_options": element.get("skills_options")
+            }
 
     def next_page_token(self, response: requests.Response) -> Optional[Mapping[str, Any]]:
         return None
@@ -187,32 +236,37 @@ class EmployeesExperiences(HttpSubStream, PrimetricStream):
             cursor_field: List[str] = None,
             stream_state: Mapping[str, Any] = None,
     ) -> Iterable[Optional[Mapping[str, Any]]]:
-        # gather parent stream records in full
-        parent_stream_slices = self.parent.stream_slices(
-            sync_mode=sync_mode, cursor_field=cursor_field, stream_state=stream_state
-        )
-
-        # iterate over parent stream slices
-        for current_slice in parent_stream_slices:
-            parent_records = self.parent.read_records(
-                sync_mode=sync_mode, cursor_field=cursor_field, stream_slice=current_slice, stream_state=stream_state
-            )
-
-            for record in parent_records:
-                yield {"parent": record}
+        for employee in self.parent.read_records(sync_mode):
+            yield {"uuid": employee["uuid"]}
 
 
 class EmployeesEducation(HttpSubStream, PrimetricStream):
+    primary_key = "education_uuid"
+
     def __init__(self, parent, authenticator, **kwargs):
         super().__init__(parent=parent, authenticator=authenticator, **kwargs)
 
     def path(self, stream_state: Mapping[str, Any] = None, stream_slice: Mapping[str, Any] = None,
              next_page_token: Mapping[str, Any] = None
              ) -> str:
-        return f"employees/{stream_slice['parent']['uuid']}/education"
+        return f"employees/{stream_slice['uuid']}/education"
 
     def parse_response(self, response: requests.Response, **kwargs) -> Iterable[Mapping]:
-        yield from [{"uuid": ''.join(response.url.split("education/")[1].split("/data")[0]), "data": response.text}]
+        uuid = str(response.url.split("employees/")[1].split("/education")[0])
+
+        elements = response.json()
+        if not elements:
+            return
+        for element in elements:
+            yield {
+                "employee_uuid": uuid,
+                "education_uuid": element.get("uuid"),
+                "name": element.get("name"),
+                "degree": element.get("degree"),
+                "starts_at": element.get("starts_at"),
+                "ends_at": element.get("ends_at"),
+                "description": element.get("description")
+            }
 
     def next_page_token(self, response: requests.Response) -> Optional[Mapping[str, Any]]:
         return None
@@ -223,20 +277,8 @@ class EmployeesEducation(HttpSubStream, PrimetricStream):
             cursor_field: List[str] = None,
             stream_state: Mapping[str, Any] = None,
     ) -> Iterable[Optional[Mapping[str, Any]]]:
-        # gather parent stream records in full
-        parent_stream_slices = self.parent.stream_slices(
-            sync_mode=sync_mode, cursor_field=cursor_field, stream_state=stream_state
-        )
-
-        # iterate over parent stream slices
-        for current_slice in parent_stream_slices:
-            parent_records = self.parent.read_records(
-                sync_mode=sync_mode, cursor_field=cursor_field, stream_slice=current_slice, stream_state=stream_state
-            )
-
-            for record in parent_records:
-                yield {"parent": record}
-
+        for employee in self.parent.read_records(sync_mode):
+            yield {"uuid": employee["uuid"]}
 
 class Hashtags(PrimetricStream):
     def path(self, **kwargs) -> str:
@@ -275,7 +317,6 @@ class OrganizationPositions(PrimetricStream):
 
 
 class OrganizationRagScopes(PrimetricStream):
-
     primary_key = "text"
 
     def path(self, **kwargs) -> str:
@@ -290,11 +331,6 @@ class OrganizationRoles(PrimetricStream):
 class OrganizationSeniorities(PrimetricStream):
     def path(self, **kwargs) -> str:
         return "organization/seniorities"
-
-
-#class OrganizationSkills(PrimetricStream):
-#    def path(self, **kwargs) -> str:
-#        return "organization/skills"
 
 
 class OrganizationTags(PrimetricStream):
@@ -340,47 +376,6 @@ class RagRatings(PrimetricStream):
         return "rag_ratings"
 
 
-class ReportsCustom(PrimetricStream):
-    def path(self, **kwargs) -> str:
-        return "reports/custom"
-
-
-class ReportsCustomData(HttpSubStream, PrimetricStream):
-    def __init__(self, parent, authenticator, **kwargs):
-        super().__init__(parent=parent, authenticator=authenticator, **kwargs)
-
-    def path(self, stream_state: Mapping[str, Any] = None, stream_slice: Mapping[str, Any] = None,
-             next_page_token: Mapping[str, Any] = None
-             ) -> str:
-        return f"reports/custom/{stream_slice['parent']['uuid']}/data"
-
-    def parse_response(self, response: requests.Response, **kwargs) -> Iterable[Mapping]:
-        yield from [{"uuid": ''.join(response.url.split("custom/")[1].split("/data")[0]), "data": response.text}]
-
-    def next_page_token(self, response: requests.Response) -> Optional[Mapping[str, Any]]:
-        return None
-
-    def stream_slices(
-            self,
-            sync_mode: SyncMode = SyncMode.full_refresh,
-            cursor_field: List[str] = None,
-            stream_state: Mapping[str, Any] = None,
-    ) -> Iterable[Optional[Mapping[str, Any]]]:
-        # gather parent stream records in full
-        parent_stream_slices = self.parent.stream_slices(
-            sync_mode=sync_mode, cursor_field=cursor_field, stream_state=stream_state
-        )
-
-        # iterate over parent stream slices
-        for current_slice in parent_stream_slices:
-            parent_records = self.parent.read_records(
-                sync_mode=sync_mode, cursor_field=cursor_field, stream_slice=current_slice, stream_state=stream_state
-            )
-
-            for record in parent_records:
-                yield {"parent": record}
-
-
 class Timeoffs(PrimetricStream):
     def path(self, **kwargs) -> str:
         return "timeoffs"
@@ -388,8 +383,6 @@ class Timeoffs(PrimetricStream):
 
 class Worklogs(PrimetricStream):
     def __init__(self, authenticator, migration_method, migration_start_date):
-        print("Migration method to set: ", migration_method)
-        print("Migration_start_date to set: ", migration_start_date)
         super(PrimetricStream, self).__init__(authenticator)
         self.migration_method = migration_method
         self.migration_start_date = migration_start_date
@@ -399,8 +392,6 @@ class Worklogs(PrimetricStream):
         return True
 
     def path(self, **kwargs) -> str:
-        #if self.migration_method == 'Migration from date' or self.migration_method == 'Migration from X last days':
-        #    return "worklogs/worklogs_iterator/?starts_between_min=" + str(self.migration_start_date)
         return "worklogs/worklogs_iterator"
 
     def request_params(
@@ -439,58 +430,37 @@ class SourcePrimetric(AbstractSource):
 
         try:
             response = requests.request(method="POST", url=token_refresh_endpoint, data=data, headers=headers)
-
         except Exception as e:
             raise Exception(f"Error while refreshing access token: {e}") from e
-
         return response
 
-
-#     def check_connection(self, logger, config) -> Tuple[bool, any]:
     def check_connection(self, logger, config: Mapping[str, Any]) -> Tuple[bool, any]:
         try:
-
             if not config["client_secret"] or not config["client_id"]:
                 raise Exception("Empty config values! Check your configuration file!")
 
             self.get_connection_response(config).raise_for_status()
-
             return True, None
 
         except Exception as e:
             return False, e
 
-#     def streams(self, config: Mapping[str, Any]) -> List[Stream]:
     def streams(self, config: Mapping[str, Any]) -> List[Stream]:
         response = self.get_connection_response(config)
         response.raise_for_status()
 
         self.migration_method = config["migration_type"]["method"]
-        print("migration_method: ", self.migration_method)
 
-        # TODO how shoud I call the migration methods is " " fine there or should it be cammelcase or with "_"???
-        # TODO renaming variables / migration types / spec.yaml
-
-        if self.migration_method == 'Full migration':
-            # TODO for testing, remove later
-            print("Full migration detected")
-        elif self.migration_method == "Migration from date":
+        if self.migration_method == "Migration from date":
             self.migration_start_date = config["migration_type"]["starting_migration_date"]
-
-            # TODO for testing, remove later
-            print("Migration from date detected")
-            print("Migration start date is set for ", self.migration_start_date)
-
         elif self.migration_method == "Migration from X last days":
             last_days_to_migrate = config["migration_type"]["last_days_to_migrate"]
             self.migration_start_date = date.today() - timedelta(days=last_days_to_migrate)
-
-        else:
+        elif self.migration_method != 'Full migration':
             print("Warning unknown method detected ", self.migration_method)
 
         authenticator = TokenAuthenticator(response.json()["access_token"])
         employees = Employees(authenticator=authenticator)
-        reportsCustom = ReportsCustom(authenticator=authenticator)
 
         return [
             Assignments(authenticator=authenticator),
@@ -513,7 +483,6 @@ class SourcePrimetric(AbstractSource):
             OrganizationRagScopes(authenticator=authenticator),
             OrganizationRoles(authenticator=authenticator),
             OrganizationSeniorities(authenticator=authenticator),
-            # OrganizationSkills(authenticator=authenticator),
             OrganizationTags(authenticator=authenticator),
             OrganizationTeams(authenticator=authenticator),
             OrganizationTimeoffTypes(authenticator=authenticator),
@@ -525,7 +494,5 @@ class SourcePrimetric(AbstractSource):
             Timeoffs(authenticator=authenticator),
             Worklogs(authenticator=authenticator,
                      migration_method=self.migration_method,
-                     migration_start_date=self.migration_start_date),
-            reportsCustom,
-            ReportsCustomData(parent=reportsCustom, authenticator=authenticator),
+                     migration_start_date=self.migration_start_date)
         ]

@@ -1,9 +1,11 @@
 {
   "type": "object",
   "properties": {
-    "uuid": {
-      "type": "string",
-      "format": "uuid"
+    "employee_uuid": {
+      "type": "string"
+    },
+    "contract_uuid": {
+      "type": "string"
     },
     "starts_at": {
       "type": ["null", "string"],
